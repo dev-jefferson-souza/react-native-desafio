@@ -44,6 +44,6 @@ export  const styles = StyleSheet.create({
     tipsText:{
         color:'#8a8a8a',
         textAlign:"center",
-        marginTop: 28
+        marginTop: 24
     }
 });

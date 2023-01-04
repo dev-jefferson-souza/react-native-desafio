@@ -9,6 +9,7 @@ import { Spacer } from "../../components/Spacer/Spacer"
 import { PurpleButton } from "../../components/Buttons/PurpleButton"
 import { userModel } from "../../models/userModel"
 import userService from "../../api/services/userService"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 export const Register = ({navigation}) => {
 
@@ -45,6 +46,10 @@ export const Register = ({navigation}) => {
             const response = await userService.userPOST(user)
             if(response.status == 201){
                 Alert.alert("Parabéns!", "Conta criada com sucesso!")
+                AsyncStorage.setItem("@ID", JSON.stringify(response.data))
+                const responseID = await AsyncStorage.getItem("@ID")
+                console.log(responseID)
+
             }
         }catch(err){
             console.log(err)       

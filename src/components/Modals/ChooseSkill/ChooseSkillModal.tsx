@@ -59,7 +59,7 @@ export const ChooseSkillModal = ({
                 <Text style={styles.subtitle}>Skills</Text>
                 <Entypo name="tools" size={24} color="#fff" />
             </View>
-            <View style={{height: 260}}>
+            <View style={{height: 280}}>
                 <FlatList
                     initialNumToRender={3}
                     data={skillsData}

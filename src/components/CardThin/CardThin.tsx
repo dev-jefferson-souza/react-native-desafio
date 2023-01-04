@@ -1,3 +1,5 @@
+import React from "react"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import { Alert, Text, Image, TouchableOpacity, TouchableOpacityProps, View } from "react-native"
 import userSkillservice from "../../api/services/userSkillService"
 import { userSkillModel } from "../../models/userSkillModel"
@@ -14,6 +16,17 @@ interface CardThinProps extends TouchableOpacityProps{
 
 export const CardThin = ({name, imageURL, version, id, onpress, ...rest} : CardThinProps) => {
 
+    const [userID, setUserID] = React.useState<number>(0)
+
+    React.useEffect(() => {
+        handleUserID()
+    })
+
+    const handleUserID = async () => {
+        const response = await AsyncStorage.getItem("@ID")
+        setUserID(parseInt(response))
+    }
+
     const getCurrentDate = () => {
         const date = new Date().toJSON().slice(0, 10); 
         return date
@@ -21,7 +34,7 @@ export const CardThin = ({name, imageURL, version, id, onpress, ...rest} : CardT
 
     const userSkill : userSkillModel = {
         knowledgeLevel: 0,
-        user: 10000,
+        user: userID,
         createdAt: getCurrentDate(),
         skill: id
     }
