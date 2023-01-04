@@ -55,9 +55,7 @@ export const ChooseSkillModal = ({
         </TouchableWithoutFeedback>
   
         {/* Content */}
-        <View
-          style={styles.modalContentView}
-        >
+        <View style={styles.modalContentView}>
             <View style={{flexDirection: "row", justifyContent:"center", marginBottom: 12}}>
                 <Text style={styles.subtitle}>Skills</Text>
                 <Entypo name="tools" size={24} color="#fff" />

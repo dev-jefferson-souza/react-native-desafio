@@ -9,7 +9,6 @@ export const Routes = () => {
 
   const { auth } = React.useContext(AuthContext);
   const { setAuth } = React.useContext(AuthContext);
-  // const auth = true
   
   React.useEffect(() => {
     verifyingUser()
@@ -17,7 +16,7 @@ export const Routes = () => {
 
   const verifyingUser = async () => {
     const response = await AsyncStorage.getItem("@ID")
-    if(response != null || response != undefined){
+    if(response != null && response != undefined){
       setAuth(true)
     }
   }

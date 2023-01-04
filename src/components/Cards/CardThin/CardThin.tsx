@@ -44,6 +44,7 @@ export const CardThin = ({name, imageURL, version, id, onpress, ...rest} : CardT
     const postCategory = async () => {
         try{
             const response =  await userSkillservice.userSkillPOST(userSkill)
+            console.log(response.status)
         }catch(err){
             console.log(err)
             Alert.alert("Ops...", "Não foi possível selecionar a categoria, tente novamenta mais tarde.")
@@ -52,7 +53,6 @@ export const CardThin = ({name, imageURL, version, id, onpress, ...rest} : CardT
     }
 
     return(
-
         <TouchableOpacity style={styles.container} activeOpacity={0.85} onPress={() => postCategory()}>
             <View style={{flexDirection: "row", alignItems:"center"}}>
                 <Image style={styles.image}  source={{uri: imageURL}}/>

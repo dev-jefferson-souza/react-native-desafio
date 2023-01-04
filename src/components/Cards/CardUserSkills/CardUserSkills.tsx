@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import { Alert, Text, Image, TouchableOpacity, TouchableOpacityProps, View } from "react-native"
 import { AntDesign } from '@expo/vector-icons'; 
 import userSkillservice from "../../../api/services/userSkillService"
-import { userSkillModel, userSkillModelUPDATE } from "../../../models/userSkillModel"
+import { userSkillModelUPDATE } from "../../../models/userSkillModel"
 
 import { styles } from "./styles"
 import skillService from "../../../api/services/skillService"
