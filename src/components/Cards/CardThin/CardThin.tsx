@@ -1,8 +1,8 @@
 import React from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { Alert, Text, Image, TouchableOpacity, TouchableOpacityProps, View } from "react-native"
-import userSkillservice from "../../api/services/userSkillService"
-import { userSkillModel } from "../../models/userSkillModel"
+import userSkillservice from "../../../api/services/userSkillService"
+import { userSkillModel } from "../../../models/userSkillModel"
 
 import { styles } from "./styles"
 
@@ -16,7 +16,7 @@ interface CardThinProps extends TouchableOpacityProps{
 
 export const CardThin = ({name, imageURL, version, id, onpress, ...rest} : CardThinProps) => {
 
-    const [userID, setUserID] = React.useState<number>(0)
+    const [userID, setUserID] = React.useState(null)
 
     React.useEffect(() => {
         handleUserID()
@@ -24,7 +24,9 @@ export const CardThin = ({name, imageURL, version, id, onpress, ...rest} : CardT
 
     const handleUserID = async () => {
         const response = await AsyncStorage.getItem("@ID")
-        setUserID(parseInt(response))
+        if(response != null || response != undefined){
+            setUserID(response)
+        }
     }
 
     const getCurrentDate = () => {
@@ -42,7 +44,6 @@ export const CardThin = ({name, imageURL, version, id, onpress, ...rest} : CardT
     const postCategory = async () => {
         try{
             const response =  await userSkillservice.userSkillPOST(userSkill)
-            console.log(response.data)
         }catch(err){
             console.log(err)
             Alert.alert("Ops...", "Não foi possível selecionar a categoria, tente novamenta mais tarde.")

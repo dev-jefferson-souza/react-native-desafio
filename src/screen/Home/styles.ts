@@ -3,10 +3,10 @@ import { StyleSheet, Platform } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     paddingTop: Platform.OS == "ios" ? 64 : 52,
-    paddingHorizontal: 24,
     backgroundColor: '#0d0d0f',
     height: '100%',
-    alignItems:"center"
+    alignItems:"center",
+    paddingHorizontal: 24
   },
   boxForm:{
     marginTop: 'auto',
@@ -20,5 +20,10 @@ export const styles = StyleSheet.create({
   buttonText:{
     color: '#4611ad',
     marginLeft: 8
-  }
+  },
+  subtitle:{
+    color: '#dedede',
+    fontSize: 24,
+    fontWeight: '500',
+},
 })

@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { userSkillModel } from "../../models/userSkillModel";
+import { userSkillModel, userSkillModelUPDATE } from "../../models/userSkillModel";
 import { api } from "../api";
 
 const uri : string = '/userSkills/'
@@ -17,7 +17,7 @@ function userSkillPOST(user : userSkillModel) : Promise<AxiosResponse> {
     return api.post(uri, user);
 }
 
-function userSkillUPDATE(id: number, userSkillUpdated: userSkillModel) : Promise<AxiosResponse> {
+function userSkillUPDATE(id: number, userSkillUpdated: userSkillModelUPDATE) : Promise<AxiosResponse> {
     return api.put(uri + id, userSkillUpdated);
 }
 

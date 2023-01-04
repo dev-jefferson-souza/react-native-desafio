@@ -17,7 +17,6 @@ export const Routes = () => {
 
   const verifyingUser = async () => {
     const response = await AsyncStorage.getItem("@ID")
-    console.log(response)
     if(response != null || response != undefined){
       setAuth(true)
     }

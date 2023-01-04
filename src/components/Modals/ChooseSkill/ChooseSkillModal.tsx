@@ -9,8 +9,9 @@ import {
 import React, { useState } from "react";
 import { styles } from "./styles";
 import skillService from "../../../api/services/skillService";
-import { CardThin } from "../../CardThin/CardThin";
+import { CardThin } from "../../Cards/CardThin/CardThin";
 import { Entypo } from '@expo/vector-icons'; 
+import { AuthContext } from "../../../context/AuthContext";
 
  
   
@@ -21,6 +22,7 @@ export const ChooseSkillModal = ({
   }) => {
 
     const [skillsData, setSkillsData] = useState() 
+    const { filteringSkils } = React.useContext(AuthContext)
 
     React.useEffect(() => {
         getSkills()
@@ -34,7 +36,8 @@ export const ChooseSkillModal = ({
     }
 
     const closeModal = () => {
-        setIsSelectedModal(false);
+      filteringSkils()
+      setIsSelectedModal(false);
     }
   
     return (
