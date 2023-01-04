@@ -10,10 +10,13 @@ import { PurpleButton } from "../../components/Buttons/PurpleButton"
 import { userModel } from "../../models/userModel"
 import userService from "../../api/services/userService"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { Loading } from "../../components/Loading/Loading"
+import { AuthContext } from "../../context/AuthContext"
 
 export const Register = ({navigation}) => {
 
-    // const [user, setUser] = useState<userModel>()
+    const { setAuth } = React.useContext(AuthContext);
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [login, setLogin] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [passwordConfirmation, setPasswordConfirmation] = useState<string>("")
@@ -44,22 +47,24 @@ export const Register = ({navigation}) => {
     const postUser = async (user) =>{
         try{
             const response = await userService.userPOST(user)
+            setIsLoading(true)
             if(response.status == 201){
                 Alert.alert("Parabéns!", "Conta criada com sucesso!")
                 AsyncStorage.setItem("@ID", JSON.stringify(response.data))
-                const responseID = await AsyncStorage.getItem("@ID")
-                console.log(responseID)
-
+                setAuth(true)
             }
         }catch(err){
             console.log(err)       
             Alert.alert("Ops...", "Algo deu errado, tente novamente mais tarde...")
+        }finally{
+            setIsLoading(false)
         }
     }
 
     return(
     <View style={styles.container}>
         <Logo size={48}/>
+        <Loading visible={isLoading}/>
         <View style={styles.boxForm}>
             <CommonInput 
                 title="Login"
