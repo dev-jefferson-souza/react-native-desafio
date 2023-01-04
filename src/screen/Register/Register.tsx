@@ -10,7 +10,7 @@ import { PurpleButton } from "../../components/Buttons/PurpleButton"
 import { userModel } from "../../models/userModel"
 import userService from "../../api/services/userService"
 
-export const Register = () => {
+export const Register = ({navigation}) => {
 
     // const [user, setUser] = useState<userModel>()
     const [login, setLogin] = useState<string>("")
@@ -78,7 +78,7 @@ export const Register = () => {
         </View>
         <View style={{flexDirection:"row"}}>
             <Text style={styles.lastText}> Já possui uma conta?</Text>
-            <TouchableOpacity activeOpacity={0.7} onPress={() => console.log('Foi para login')}>
+            <TouchableOpacity activeOpacity={0.7} onPress={() =>  navigation.navigate('Login')}>
                 <Text style={styles.buttonText}>Entrar</Text>
             </TouchableOpacity>
         </View>

@@ -8,7 +8,7 @@ import { CommonInput } from "../../components/Inputs/CommonInput/CommonInput"
 import { Spacer } from "../../components/Spacer/Spacer"
 import { PurpleButton } from "../../components/Buttons/PurpleButton"
 
-export const Login = () => {
+export const Login = ({navigation}) => {
 
     const [login, setLogin] = useState<string>("")
     const [password, setPassword] = useState<string>("")
@@ -43,7 +43,7 @@ export const Login = () => {
         </View>
         <View style={{flexDirection:"row"}}>
             <Text style={styles.lastText}> Não possui uma conta?</Text>
-            <TouchableOpacity activeOpacity={0.7} onPress={() => console.log('Foi para login')}>
+            <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate('Register')}>
                 <Text style={styles.buttonText}>Criar conta</Text>
             </TouchableOpacity>
         </View>
