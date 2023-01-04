@@ -1,4 +1,4 @@
-import { Alert, Text, Image, TouchableOpacity, TouchableOpacityProps } from "react-native"
+import { Alert, Text, Image, TouchableOpacity, TouchableOpacityProps, View } from "react-native"
 import userSkillservice from "../../api/services/userSkillService"
 import { userSkillModel } from "../../models/userSkillModel"
 
@@ -40,8 +40,10 @@ export const CardThin = ({name, imageURL, version, id, onpress, ...rest} : CardT
     return(
 
         <TouchableOpacity style={styles.container} activeOpacity={0.85} onPress={() => postCategory()}>
-            <Text style={styles.title}>{name}</Text>
-            <Image style={styles.image}  source={{uri: imageURL}}/>
+            <View style={{flexDirection: "row", alignItems:"center"}}>
+                <Image style={styles.image}  source={{uri: imageURL}}/>
+                <Text style={styles.title}>{name}</Text>
+            </View>
             <Text style={styles.version}>Versão {version}</Text>
         </TouchableOpacity>
     )

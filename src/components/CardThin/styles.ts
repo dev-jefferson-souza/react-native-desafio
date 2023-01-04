@@ -2,40 +2,41 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
-        width: 160,
-        height: 240,
+        width: '100%',
+        flexDirection:"row",
+        backgroundColor:'#151519',
+        borderRadius: 12,
+        justifyContent:"space-between",
         alignItems:"center",
+        padding: 10
+        
     },
     image:{
-        width: '100%',
-        height: '100%',
+        width: 60,
+        height: 60,
         borderRadius: 12,
         backgroundColor:'#151519',
-        resizeMode:"contain"
+        resizeMode:"contain",
+        flexDirection:"row",
+        marginRight: 8
         
     },
     title:{
         fontSize: 18,
-        width:'100%',
         textAlign:"center",
         fontWeight: "800",
         color: '#fff',
-        position: "absolute",
-        top: 10,
         zIndex: 2,
     },
     version:{
         fontSize: 14,
-        paddingVertical: 4,
+        padding: 4,
+        height: 24,
         fontWeight: '900',
         color: '#fff',
         textAlign:"center",
-        position:"absolute",
-        bottom: 0,
-        width:'100%',
         backgroundColor:"#4611ad",
-        borderBottomLeftRadius: 12,
-        borderBottomRightRadius: 12
+        borderRadius: 12,
     }
   })
   

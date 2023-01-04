@@ -5,7 +5,7 @@ import { PublicRoute } from './public.routes';
 
 export const Routes = () => {
 
-  const auth  = false
+  const auth  = true
   
   return(
     auth ? <PrivateRoute/> : <PublicRoute/> 
