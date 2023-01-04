@@ -66,7 +66,7 @@ export const ChooseSkillModal = ({
                     data={skillsData}
                     renderItem={({item, index, separators}) => (
                         <ScrollView horizontal={true}>    
-                            <CardThin imageURL={item.imageUrl} name={item.name} version={item.version} id={item.id}/>
+                            <CardThin imageURL={item.imageUrl} name={item.name} version={item.version} id={item.id} onpress={() => closeModal()}/>
                             <View style={{width: 12, height:'100%'}}/>
                         </ScrollView>
                     )}
