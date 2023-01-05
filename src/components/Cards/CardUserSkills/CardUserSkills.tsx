@@ -7,7 +7,6 @@ import { userSkillModelUPDATE } from "../../../models/userSkillModel"
 
 import { styles } from "./styles"
 import skillService from "../../../api/services/skillService"
-import { Loading } from "../../Loading/Loading"
 import { AuthContext } from "../../../context/AuthContext";
 
 interface CardUserSkillsProps extends TouchableOpacityProps{
@@ -24,7 +23,7 @@ export const CardUserSkills = ({knowledgeLevel, id, createdAt, onpress, user, us
     
     const [newLevel, setNewLevel] = React.useState<number>(knowledgeLevel)
     const { filteringSkils } = React.useContext(AuthContext)
-    const [skillInfo, setSkillInfo] = React.useState({name: "", version: "",  imageUrl: "a"})
+    const [skillInfo, setSkillInfo] = React.useState({name: "", version: "",  imageUrl: "a", description:""})
     const [userID, setUserID] = React.useState(null);
 
 
@@ -103,8 +102,8 @@ export const CardUserSkills = ({knowledgeLevel, id, createdAt, onpress, user, us
     }else{
         return(
             <View style={styles.container}>
-                <Loading visible={skillInfo.version == "loading" && skillInfo.name == "loading" ? true : false}/>
                 <View style={{alignItems:"center"}}>
+                <Text style={styles.description} numberOfLines={1}>{skillInfo.description}</Text>
                     <Image style={styles.image}  source={{uri: skillInfo.imageUrl}}/>
                     <Text style={styles.title} numberOfLines={1}>{skillInfo.name}</Text>
                 </View>

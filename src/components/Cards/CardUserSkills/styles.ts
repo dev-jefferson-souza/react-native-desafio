@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         backgroundColor:'#151519',
         borderRadius: 12,
         justifyContent:"space-between",
-        paddingTop: 24,
+        paddingTop: 18,
         marginHorizontal: 4
     },
     image:{
@@ -26,6 +26,14 @@ export const styles = StyleSheet.create({
         fontWeight: "800",
         color: '#fff',
         zIndex: 2,
+    },
+    description:{
+        fontSize: 16,
+        textAlign:"center",
+        fontWeight: "800",
+        color: '#fff',
+        zIndex: 2,
+        marginBottom: 8
     },
     version:{
         fontSize: 14,
