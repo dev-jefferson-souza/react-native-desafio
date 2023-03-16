@@ -23,9 +23,5 @@ export interface userSkillPostModel {
 }
 
 export interface userSkillUpdateModel {
-  user: user;
-  skill: skill;
   knowledgeLevel: number;
-  createdAt: string;
-  updatedAt: string;
 }

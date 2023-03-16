@@ -17,7 +17,6 @@ function userSkillGET(id: number): Promise<AxiosResponse> {
 }
 
 function userSkillPOST(user: userSkillPostModel): Promise<AxiosResponse> {
-  console.log(user);
   return api.post(uri, user);
 }
 
@@ -25,7 +24,7 @@ function userSkillUPDATE(
   id: number,
   userSkillUpdated: userSkillUpdateModel
 ): Promise<AxiosResponse> {
-  return api.put(uri + id, userSkillUpdated);
+  return api.patch(uri + id, userSkillUpdated);
 }
 
 function userSkillDELETE(id: number): Promise<AxiosResponse> {

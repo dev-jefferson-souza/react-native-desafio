@@ -22,40 +22,19 @@ interface CardUserSkillsProps extends TouchableOpacityProps {
 }
 
 export const CardUserSkills = ({ skillInfo }: CardUserSkillsProps) => {
-  const { getUsersSkillsUpdated, user } = React.useContext(AuthContext);
+  const { getUsersSkillsUpdated } = React.useContext(AuthContext);
   const [newLevel, setNewLevel] = React.useState<number>(
     skillInfo.knowledgeLevel
   );
   const [numberOfLines, setNumberOfLines] = React.useState<number>(3);
 
-  function formatDate(date) {
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const year = date.getFullYear().toString();
-    const hours = date.getHours().toString().padStart(2, "0");
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-    const seconds = date.getSeconds().toString().padStart(2, "0");
-
-    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-  }
-
-  const now = new Date();
-  const formattedDate = formatDate(now);
-
   const userSkill: userSkillUpdateModel = {
     knowledgeLevel: newLevel,
-    updatedAt: formattedDate,
-    skill: { id: skillInfo.id },
-    createdAt: skillInfo.createdAt,
-    user: { id: user.id },
   };
 
   const updateUserSkill = async () => {
     try {
-      const response = await userSkillservice.userSkillUPDATE(
-        skillInfo.id,
-        userSkill
-      );
+      await userSkillservice.userSkillUPDATE(skillInfo.id, userSkill);
       getUsersSkillsUpdated();
     } catch (err) {
       console.log(err);

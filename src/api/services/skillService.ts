@@ -13,7 +13,6 @@ function skillGET(id: number): Promise<AxiosResponse> {
 }
 
 function skillPOST(user: skillModel): Promise<AxiosResponse> {
-  console.log(user);
   return api.post(uri, user);
 }
 
