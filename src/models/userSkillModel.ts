@@ -1,14 +1,31 @@
-export interface userSkillModel {
-    knowledgeLevel: number,
-    createdAt: string,
-    user: number,
-    skill: number,
+import { skillModel } from "./skillsModel";
+import { userModel } from "./userModel";
+
+interface user {
+  id: number;
 }
 
-export interface userSkillModelUPDATE {
-    knowledgeLevel: number,
-    updatedAt: string,
-    skill: number,
-    createdAt: string,
-    user: number
+interface skill {
+  id: number;
+}
+export interface userSkillModel {
+  id: number;
+  user: userModel;
+  skill: skillModel;
+  knowledgeLevel: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface userSkillPostModel {
+  user: user;
+  skill: skill;
+}
+
+export interface userSkillUpdateModel {
+  user: user;
+  skill: skill;
+  knowledgeLevel: number;
+  createdAt: string;
+  updatedAt: string;
 }
