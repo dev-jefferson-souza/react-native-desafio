@@ -1,4 +1,9 @@
+export interface userModelLogin {
+  login: string;
+  password: string;
+}
+
 export interface userModel {
-    login: string,
-    password: string,
+  id: number;
+  login: string;
 }
