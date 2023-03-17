@@ -18,7 +18,6 @@ export const Home = () => {
 
   React.useEffect(() => {
     getUsersSkillsUpdated();
-    // verifyingUser()
   }, []);
 
   const logout = () => {

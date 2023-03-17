@@ -37,7 +37,7 @@ export const CardThin = ({
 
   const postCategory = async () => {
     try {
-      const response = await userSkillservice.userSkillPOST(userSkill);
+      await userSkillservice.userSkillPOST(userSkill);
     } catch (err) {
       console.log(err);
       Alert.alert(

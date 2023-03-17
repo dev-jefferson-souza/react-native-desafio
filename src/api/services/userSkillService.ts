@@ -12,6 +12,10 @@ function userSkillGETALL(): Promise<AxiosResponse> {
   return api.get(uri);
 }
 
+function userSkillGetSkillFromUser(id: number): Promise<AxiosResponse> {
+  return api.get(uri + "user/" + id);
+}
+
 function userSkillGET(id: number): Promise<AxiosResponse> {
   return api.get(uri + id);
 }
@@ -37,5 +41,6 @@ const userSkillservice = {
   userSkillPOST,
   userSkillUPDATE,
   userSkillDELETE,
+  userSkillGetSkillFromUser,
 };
 export default userSkillservice;

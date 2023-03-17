@@ -17,6 +17,17 @@ export interface userSkillModel {
   updatedAt: string;
 }
 
+export interface userSkillFromUser {
+  id: number;
+  name: string;
+  version: string;
+  description: string;
+  updatedAt: string;
+  imageUrl: string;
+  skillId: number;
+  knowledgeLevel: number;
+}
+
 export interface userSkillPostModel {
   user: user;
   skill: skill;

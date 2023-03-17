@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { signInProps } from "./signIn";
 import { userModel } from "./userModel";
-import { userSkillModel } from "./userSkillModel";
+import { userSkillFromUser } from "./userSkillModel";
 
 export type AuthContextType = {
   token: string | null;
@@ -10,7 +10,7 @@ export type AuthContextType = {
   setUser: (user: userModel | null) => void;
   signIn: (user: signInProps) => Promise<void>;
   getUsersSkillsUpdated: () => void;
-  usersSkills: userSkillModel[] | null;
+  usersSkills: userSkillFromUser[] | null;
 };
 
 export type AuthProviderProps = {

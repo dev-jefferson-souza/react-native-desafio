@@ -12,13 +12,13 @@ import userSkillservice from "../../../api/services/userSkillService";
 
 import { AuthContext } from "../../../context/AuthContext";
 import {
-  userSkillModel,
+  userSkillFromUser,
   userSkillUpdateModel,
 } from "../../../models/userSkillModel";
 import { styles } from "./styles";
 
 interface CardUserSkillsProps extends TouchableOpacityProps {
-  skillInfo: userSkillModel;
+  skillInfo: userSkillFromUser;
 }
 
 export const CardUserSkills = ({ skillInfo }: CardUserSkillsProps) => {
@@ -47,7 +47,7 @@ export const CardUserSkills = ({ skillInfo }: CardUserSkillsProps) => {
 
   const removeUserSkill = async () => {
     try {
-      const response = await userSkillservice.userSkillDELETE(skillInfo.id);
+      await userSkillservice.userSkillDELETE(skillInfo.id);
       getUsersSkillsUpdated();
     } catch (err) {
       console.log(err);
@@ -76,23 +76,20 @@ export const CardUserSkills = ({ skillInfo }: CardUserSkillsProps) => {
     <View style={styles.container}>
       <View style={{ alignItems: "center" }}>
         <Text style={styles.title} numberOfLines={1}>
-          {skillInfo.skill.name}
+          {skillInfo.name}
         </Text>
-        <Image
-          style={styles.image}
-          source={{ uri: skillInfo.skill.image_url }}
-        />
+        <Image style={styles.image} source={{ uri: skillInfo.imageUrl }} />
         <Text
           style={styles.description}
           numberOfLines={numberOfLines}
           onPress={handleNumberOfLines}
         >
-          {skillInfo.skill.description}
+          {skillInfo.description}
         </Text>
       </View>
       <View style={{ position: "absolute", bottom: 52 }}>
         <Text style={styles.version} numberOfLines={1}>
-          Versão {skillInfo.skill.version}
+          Versão {skillInfo.version}
         </Text>
         <View style={styles.levelBox}>
           <TouchableOpacity onPress={() => decreaseLevel()}>
@@ -120,6 +117,7 @@ export const CardUserSkills = ({ skillInfo }: CardUserSkillsProps) => {
         style={{
           ...styles.updateButton,
           display: newLevel != skillInfo.knowledgeLevel ? "flex" : "none",
+          backgroundColor: "green",
         }}
         activeOpacity={0.7}
         onPress={() => updateUserSkill()}

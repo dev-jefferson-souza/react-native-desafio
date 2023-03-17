@@ -6,7 +6,7 @@ import userSkillservice from "../api/services/userSkillService";
 import { AuthContextType, AuthProviderProps } from "../models/authContext";
 import { signInProps } from "../models/signIn";
 import { userModel } from "../models/userModel";
-import { userSkillModel } from "../models/userSkillModel";
+import { userSkillFromUser } from "../models/userSkillModel";
 
 const LOCAL_STORAGE_TOKEN_KEY = "@neki-desafio-token";
 const LOCAL_STORAGE_USER_KEY = "@neki-desafio-user";
@@ -24,7 +24,7 @@ export const AuthContext = createContext<AuthContextType>({
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<userModel | null>(null);
-  const [usersSkills, setUserSkills] = useState<userSkillModel[]>([]);
+  const [usersSkills, setUserSkills] = useState<userSkillFromUser[]>([]);
 
   useEffect(() => {
     async function loadStorageData() {
@@ -71,13 +71,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }
 
   async function getUsersSkillsUpdated() {
-    const response = await userSkillservice.userSkillGETALL();
     try {
-      const unfilteredUsersSkills: userSkillModel[] = response.data;
-      const filteredUsersSkill = unfilteredUsersSkills.filter(
-        (uSkill) => uSkill.user.id === user.id
+      const response = await userSkillservice.userSkillGetSkillFromUser(
+        user.id
       );
-      setUserSkills(filteredUsersSkill);
+      setUserSkills(response.data);
     } catch (e) {
       console.log(e);
       alert("Houve um problema ao carregar as userSkills");
