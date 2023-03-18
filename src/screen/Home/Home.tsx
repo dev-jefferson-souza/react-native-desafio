@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import { FlatList, ScrollView, Text, View } from "react-native";
+import Container from "toastify-react-native";
 import { ExitButton } from "../../components/Buttons/ExitButton";
 import { OpenModal } from "../../components/Buttons/OpenModal";
 import { CardUserSkills } from "../../components/Cards/CardUserSkills/CardUserSkills";
@@ -28,6 +29,14 @@ export const Home = () => {
 
   return (
     <View style={styles.container}>
+      <Container
+        theme="dark"
+        positionValue={28}
+        duration={1400}
+        position="top"
+        width={350}
+        style={{ backgroundColor: "#000" }}
+      />
       <Loading visible={usersSkills != undefined ? false : true} />
       <View
         style={{

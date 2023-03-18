@@ -1,7 +1,6 @@
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import {
-  Alert,
   Image,
   Text,
   TouchableOpacity,
@@ -10,6 +9,7 @@ import {
 } from "react-native";
 import userSkillservice from "../../../api/services/userSkillService";
 
+import { Toast } from "toastify-react-native";
 import { AuthContext } from "../../../context/AuthContext";
 import {
   userSkillFromUser,
@@ -36,25 +36,21 @@ export const CardUserSkills = ({ skillInfo }: CardUserSkillsProps) => {
     try {
       await userSkillservice.userSkillUPDATE(skillInfo.id, userSkill);
       getUsersSkillsUpdated();
+      Toast.success("Habilidade atualizada!");
     } catch (err) {
       console.log(err);
-      Alert.alert(
-        "Ops...",
-        "Não foi possível atualizar essa habiliidade. Tente novamente mais tarde."
-      );
+      Toast.error("Erro ao atualizar");
     }
   };
 
   const removeUserSkill = async () => {
     try {
       await userSkillservice.userSkillDELETE(skillInfo.id);
+      Toast.success("Habilidade removida!");
       getUsersSkillsUpdated();
     } catch (err) {
       console.log(err);
-      Alert.alert(
-        "Ops...",
-        "Não foi possível remover essa habiliidade. Tente novamente mais tarde."
-      );
+      Toast.error("Erro ao remover");
     }
   };
 

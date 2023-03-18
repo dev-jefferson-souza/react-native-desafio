@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useEffect, useState } from "react";
+import { Toast } from "toastify-react-native";
 import { api } from "../api/api";
 import userService from "../api/services/userService";
 import userSkillservice from "../api/services/userSkillService";
@@ -49,7 +50,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response = await userService.userLOGIN(request.user);
       if (response.status === 200) {
-        alert(`Bem vindo, ${request.user.login}!`);
         if (request.savePassword === true) {
           await AsyncStorage.setItem(
             LOCAL_STORAGE_TOKEN_KEY,
@@ -63,9 +63,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         api.defaults.headers.common["Authorization"] = response.data.token;
         setToken(response.data.token);
         setUser(response.data.usuario);
+        setTimeout(() => {
+          Toast.success(`Bem vindo, ${request.user.login}!`);
+        }, 200);
       }
     } catch (err) {
-      alert("Usuário ou senha incorreta!");
+      Toast.error("Usuário ou senha incorreta!");
+
       console.log(err);
     }
   }
@@ -78,7 +82,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUserSkills(response.data);
     } catch (e) {
       console.log(e);
-      alert("Houve um problema ao carregar as userSkills");
+      Toast.error("Houve um problema ao carregar as habilidades");
     }
   }
 

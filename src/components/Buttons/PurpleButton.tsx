@@ -1,33 +1,49 @@
-import { TouchableOpacity, Text, StyleSheet, TouchableOpacityProps } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from "react-native";
 
-interface props extends TouchableOpacityProps{
-    size: number,
-    title: string
+interface props extends TouchableOpacityProps {
+  size: number;
+  title: string;
 }
 
-export const PurpleButton = ({size, title, ...rest} : props) => {
+export const PurpleButton = ({
+  size,
+  title,
+  disabled,
+  onPress,
+  ...rest
+}: props) => {
+  const containerStyle = disabled
+    ? { ...styles.container, opacity: 0.2 }
+    : { ...styles.container, opacity: 1 };
 
-    return (  
-       <TouchableOpacity 
-        style={{...styles.container, width: size}}
-        activeOpacity={0.7}
-        {...rest}
-      >
-        <Text style={styles.text}>{title}</Text>
-       </TouchableOpacity>
-    )
-}
+  const activeStyle = disabled ? 0.2 : 0.7;
+
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={{ ...containerStyle, width: size }}
+      activeOpacity={activeStyle}
+      {...rest}
+    >
+      <Text style={styles.text}>{title}</Text>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-     backgroundColor: '#4611ad',
-     borderRadius: 6,
-     alignItems:"center",
-     paddingVertical: 4
-     
-    },
-    text:{
-      color: '#fff',
-      fontSize: 24,
-    }
-  })
+  container: {
+    backgroundColor: "#4611ad",
+    borderRadius: 6,
+    alignItems: "center",
+    paddingVertical: 4,
+  },
+  text: {
+    color: "#fff",
+    fontSize: 24,
+  },
+});

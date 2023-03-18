@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Alert,
   NativeSyntheticEvent,
   Text,
   TextInputChangeEventData,
@@ -8,6 +7,7 @@ import {
   View,
 } from "react-native";
 
+import Container, { Toast } from "toastify-react-native";
 import userService from "../../api/services/userService";
 import { PurpleButton } from "../../components/Buttons/PurpleButton";
 import { CommonInput } from "../../components/Inputs/CommonInput/CommonInput";
@@ -45,29 +45,49 @@ export const Register = ({ navigation }) => {
     setPasswordConfirmation(value);
   };
 
+  function loginSuccessful() {
+    navigation.navigate("Login");
+    setTimeout(() => {
+      Toast.success("Usuário ou senha incorreta!");
+    }, 200);
+  }
+
   async function registerUser() {
     const user: userModelLogin = {
       login: login,
       password: password,
     };
 
-    if (password === passwordConfirmation) {
+    if (
+      password === passwordConfirmation &&
+      password !== "" &&
+      passwordConfirmation !== ""
+    ) {
       try {
         const response = await userService.userPOST(user);
+        console.log("rodou");
         {
-          response.status === 201 ? navigation.navigate("Login") : null;
+          response.status === 201 ? loginSuccessful() : null;
         }
       } catch (e) {
-        alert("Já existe uma conta com esse login");
+        Toast.error("Essa conta já existe");
         console.log(e);
       }
     } else {
-      Alert.alert("Ops...", "As senhas não coincidem");
+      Toast.error("As senhas não coincidem");
     }
   }
 
   return (
     <View style={styles.container}>
+      <Container
+        theme="dark"
+        positionValue={28}
+        duration={1400}
+        position="top"
+        width={350}
+        style={{ backgroundColor: "#000" }}
+      />
       <Logo size={48} />
       <Loading visible={isLoading} />
       <View style={styles.boxForm}>
@@ -89,7 +109,20 @@ export const Register = ({ navigation }) => {
           onChange={onChangePasswordConfirmation}
         />
         <Spacer size={48} />
-        <PurpleButton size={120} title={"Criar"} onPress={registerUser} />
+        <PurpleButton
+          disabled={
+            login !== "" && password !== "" && passwordConfirmation !== ""
+              ? false
+              : true
+          }
+          size={120}
+          title={"Criar"}
+          onPress={
+            login !== "" && password !== "" && passwordConfirmation !== ""
+              ? registerUser
+              : null
+          }
+        />
       </View>
       <View style={{ flexDirection: "row" }}>
         <Text style={styles.lastText}> Já possui uma conta?</Text>

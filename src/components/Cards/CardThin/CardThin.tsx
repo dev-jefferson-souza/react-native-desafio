@@ -1,12 +1,12 @@
 import React from "react";
 import {
-  Alert,
   Image,
   Text,
   TouchableOpacity,
   TouchableOpacityProps,
   View,
 } from "react-native";
+import { Toast } from "toastify-react-native";
 import userSkillservice from "../../../api/services/userSkillService";
 import { userSkillPostModel } from "../../../models/userSkillModel";
 
@@ -38,10 +38,10 @@ export const CardThin = ({
   const postCategory = async () => {
     try {
       await userSkillservice.userSkillPOST(userSkill);
+      Toast.success("Adicionada com sucesso!");
     } catch (err) {
       console.log(err);
-      Alert.alert(
-        "Ops...",
+      Toast.error(
         "Não foi possível selecionar a categoria, tente novamenta mais tarde."
       );
     }

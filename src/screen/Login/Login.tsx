@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { PurpleButton } from "../../components/Buttons/PurpleButton";
-
 import { CommonInput } from "../../components/Inputs/CommonInput/CommonInput";
 import { SecureInput } from "../../components/Inputs/SecureInput/SecureInput";
 import { Logo } from "../../components/Logo/Logo";
@@ -17,6 +16,8 @@ import { AuthContext } from "../../context/AuthContext";
 import { signInProps } from "../../models/signIn";
 import { userModelLogin } from "../../models/userModel";
 import { styles } from "./styles";
+
+import Container, { Toast } from "toastify-react-native";
 
 export const Login = ({ navigation }) => {
   const [login, setLogin] = useState<string>("");
@@ -52,12 +53,23 @@ export const Login = ({ navigation }) => {
       savePassword: savePassword,
       user: user,
     };
-
-    signIn(request);
+    {
+      login === "" || password === ""
+        ? Toast.error("Preencha todos os campos")
+        : signIn(request);
+    }
   }
 
   return (
     <View style={styles.container}>
+      <Container
+        theme="dark"
+        positionValue={28}
+        duration={1400}
+        position="top"
+        width={350}
+        style={{ backgroundColor: "#000" }}
+      />
       <Logo size={48} />
       <View style={styles.boxForm}>
         <CommonInput
@@ -84,7 +96,12 @@ export const Login = ({ navigation }) => {
           checkedColor={"#4611ad"}
         />
         <Spacer size={48} />
-        <PurpleButton size={120} title={"Entrar"} onPress={handleSignIn} />
+        <PurpleButton
+          disabled={login !== "" && password !== "" ? false : true}
+          size={120}
+          title={"Entrar"}
+          onPress={login !== "" && password !== "" ? handleSignIn : null}
+        />
       </View>
       <View style={{ flexDirection: "row" }}>
         <Text style={styles.lastText}> Não possui uma conta?</Text>
