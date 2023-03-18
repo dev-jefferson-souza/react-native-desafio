@@ -85,7 +85,7 @@ export const Login = ({ navigation }) => {
         />
 
         <CheckBox
-          title="Salvar senha"
+          title="Lembrar de mim"
           checked={savePassword}
           onPress={toggleCheckbox}
           containerStyle={{
